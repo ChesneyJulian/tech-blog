@@ -1,3 +1,4 @@
+// bring in express and sequelize instance from connectin.js
 const express = require('express');
 const sequelize = require('./config/connection');
 
