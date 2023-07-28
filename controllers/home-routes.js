@@ -4,7 +4,7 @@ const { User, Post, Comment } = require('../models');
 router.get('/', async (req, res) => {
   try {
     // get all post data
-    const postData = await Post.findAll();
+    const postData = await Post.findAll({include: [User, Comment]});
     // serialize post data
     const posts = postData.map(post => post.get({ plain: true }));
     // render posts using home-page handlebars template
