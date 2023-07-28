@@ -13,6 +13,12 @@ class Post extends Model {
 // create instance of Post and define columns
 Post.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -38,7 +44,7 @@ Post.init(
     sequelize,
     timeStamps: false,
     freezeTableName: true,
-    modelName: 'Post'
+    modelName: 'post'
   }
 );
 
