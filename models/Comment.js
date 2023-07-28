@@ -5,9 +5,9 @@ const sequelize = require('../config/connection');
 
 // extend Comment from model and add custom method to getDate
 class Comment extends Model {
-  async getDate () {
-    new Date().toString();
-  }
+  // async getDate () {
+  //   new Date().toString();
+  // }
 };
 
 // create instance of Comment and define columns
@@ -37,11 +37,11 @@ Comment.init(
         key: 'id'
       }
     },
-    dateCreated: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: getDate()
-    }
+    // dateCreated: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false,
+    //   defaultValue: getDate()
+    // }
   },
   {
     sequelize,

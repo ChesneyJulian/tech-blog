@@ -2,6 +2,7 @@
 const { Model, DataTypes } = require('sequelize');
 // initialize connection with db
 const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
 
 // extend user from model to add custom password comparison method to user
 class User extends Model {
@@ -41,7 +42,7 @@ User.init(
     hooks: {
       // use bcrypt to hash password (10 cycles) when creating a new user
       async beforeCreate(userData) {
-        userData.password = await bcrypt.hash(newUserData.password, 10);
+        userData.password = await bcrypt.hash(userData.password, 10);
         return userData;
       }
     },

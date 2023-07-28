@@ -5,9 +5,6 @@ const sequelize = require('../config/connection');
 
 // extend Post from model and add custom method to getDate
 class Post extends Model {
-  async getDate () {
-    new Date().toString();
-  }
 };
 
 // create instance of Post and define columns
@@ -34,11 +31,11 @@ Post.init(
         key: 'id'
       }
     },
-    dateCreated: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: getDate()
-    }
+    // dateCreated: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false,
+    //   defaultValue: getDate()
+    // }
   },
   {
     sequelize,
