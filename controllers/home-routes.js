@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
+// require authorize from utils to implement as middleware for routes (except homepage and login)
+const authorize = require('../utils/authorize');
 
 router.get('/', async (req, res) => {
   try {
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', authorize, async (req, res) => {
   try{
     const singlePost = await Post.findByPk(req.params.id, {
       include: [
@@ -31,15 +33,16 @@ router.get('/post/:id', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect('/');
-  //   return;
-  // }
+  // implement conditional to check if session is loggedIn and if it is, then redirect to homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
 
   res.render('login');
 });
 
-router.get('/dashboard/:id', async (req, res) => {
+router.get('/dashboard', authorize, async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
       include: [Post, Comment]
@@ -49,6 +52,6 @@ router.get('/dashboard/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
 module.exports = router;

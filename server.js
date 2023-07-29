@@ -1,13 +1,28 @@
 // bring in express and sequelize instance from connectin.js
 const express = require('express');
-const sequelize = require('./config/connection');
 const exphbs = require('express-handlebars');
+const session =  require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const sequelize = require('./config/connection');
 const routes = require('./controllers');
 
 // set up instance of express and port variable
 const PORT = process.env.PORT ?? 3001;
 const app = express();
 const hbs = exphbs.create();
+
+//  set up session with cookies default
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
