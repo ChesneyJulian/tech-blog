@@ -1,13 +1,13 @@
-{{>nav}}
-
 {{#each posts}}
 <div class="container">
-   <article class="card">
-   <h3>{{title}}</h3>
-   <p>{{content}}</p>
-   {{#with user}}
-   <footer style="background-color: rgba(112, 159, 182, 0.564);">Posted by {{username}}</footer>
-   {{/with}}
- </article>
+  <a href="/post/{{id}}">
+    <article class="card">
+    <h3>{{title}}</h3>
+    <p>{{content}}</p>
+    {{#with user}}
+    <footer style="background-color: rgba(112, 159, 182, 0.564);">Posted by {{username}}</footer>
+    {{/with}}
+  </article>
+ </a>
 </div>
 {{/each}}
