@@ -39,4 +39,16 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/dashboard/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [Post, Comment]
+    });
+    const user = userData.get({ plain: true });
+    res.render('dashboard', {user});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 module.exports = router;
