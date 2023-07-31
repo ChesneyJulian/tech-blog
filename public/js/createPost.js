@@ -14,9 +14,9 @@ const handlePostSubmission = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/dashboard');
+      document.location.reload('/dashboard');
     } else {
-      response.status
+      alert('Failed to create new post')
     }
   }
 };

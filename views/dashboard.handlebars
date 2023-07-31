@@ -1,16 +1,20 @@
 <div class="container">
-  {{#unless post}}
+  {{#unless user.posts}}
   <div style="text-align: center;">
     <h5>No posts created</h5>
   </div>
-  {{/unless}}
-  {{#each post}}
+  {{/unless}} 
+  <div style="text-align: center;">
+    <a href="#new-post">Create a new post</a>
+  </div>
+  {{#each user.posts}}
+  {{log user.posts}}
   <div class="container">
   <a href="/post/{{id}}">
     <article class="card">
     <h3>{{title}}</h3>
     <p>{{content}}</p>
-     {{#each post.comments}}
+     {{#each comments}}
     <footer style="background-color: rgba(112, 159, 182, 0.564);">
     <p>Comment by {{username}}: {{content}}</p>
     </footer>
@@ -18,8 +22,8 @@
   </article>
  </a>
 </div>
-  {{/each}}
-  <div class="container">
+{{/each}}
+  <footer style="position: sticky;" class="container">
     <form id="new-post">
       <label for="new-post">
         Create a New Post
@@ -28,7 +32,7 @@
       </label>
       <button type="submit">Submit</button>
     </form>
-  </div>
+  </footer>
 </div>
 
 <script src ="/js/createPost.js"></script>

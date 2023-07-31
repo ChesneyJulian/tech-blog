@@ -45,7 +45,10 @@ router.get('/dashboard', authorize, async (req, res) => {
     const userData = await User.findOne({
       where: {
         username: req.session.username
-      }
+      },
+      include: [{
+        model: Post
+      }]
     });
     const user = userData.get({ plain: true });
     res.render('dashboard', {
