@@ -33,6 +33,7 @@ router.get('/post/:id', authorize, async (req, res) => {
         include: [User]
     });
     const comments = (await commentData).map(comment => comment.get({ plain: true }));
+    console.log(post);
     res.render('post', {
       post,
       comments,
@@ -58,7 +59,7 @@ router.get('/dashboard', authorize, async (req, res) => {
     res.render('dashboard', {
       user,
       loggedIn: req.session.loggedIn,
-      username: req.session.username
+      username: req.session.username,
     });
   } catch (err) {
     res.status(500).json(err);

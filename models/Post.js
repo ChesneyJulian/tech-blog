@@ -31,15 +31,9 @@ Post.init(
         key: 'id'
       }
     },
-    // dateCreated: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: getDate()
-    // }
   },
   {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     modelName: 'post'
   }

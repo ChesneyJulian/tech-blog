@@ -4,19 +4,33 @@ const { User, Post, Comment } = require('../../models');
 const authorize = require('../../utils/authorize');
 
 router.post('/new-post', authorize, async (req, res) => {
+  console.log('POSTING');
   try {
-    const userData = await User.findOne({
-      where: {
-        username: req.session.username
-      }
-    });
-    const user = userData.get({ plain: true });
+    console.log('REQ BODY: ', req.body);
+    console.log('REQ SESSION', req.session);
     const newPost = await Post.create({
       title: req.body.title,
       content: req.body.content,
-      creatorId: user.id
+      creatorId: req.session.userId
     })
-    console.log(newPost);
+    console.log("POST ", newPost);
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/new-comment', authorize, async (req, res) => {  
+  try {
+    console.log('CREATING COMMENT')
+    console.log('POST ID IN SERVER', req.body.postId);
+    const newComment = await Comment.create({
+      content: req.body.comment,
+      postId: req.body.postId,
+      creatorId: req.session.userId
+    })
+    console.log('NEW COMMENT ', newComment);
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(500).json(err);
   }
