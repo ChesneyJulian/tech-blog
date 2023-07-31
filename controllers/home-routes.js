@@ -10,7 +10,10 @@ router.get('/', async (req, res) => {
     // serialize post data
     const posts = await postData.map(post => post.get({ plain: true }));
     // render posts using home-page handlebars template
-    res.render('home-page', {posts});
+    res.render('home-page', { 
+      posts,
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -26,7 +29,10 @@ router.get('/post/:id', authorize, async (req, res) => {
       ]
     });
     const post = singlePost.get({ plain: true });
-    res.render('post', {post});
+    res.render('post', {
+      post,
+      loggedIn: req.session.loggedIn
+    });
   } catch(err){
     res.status(500).json(err);
   };
@@ -48,7 +54,10 @@ router.get('/dashboard', authorize, async (req, res) => {
       include: [Post, Comment]
     });
     const user = userData.get({ plain: true });
-    res.render('dashboard', {user});
+    res.render('dashboard', {
+      user,
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }

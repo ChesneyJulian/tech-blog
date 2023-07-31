@@ -7,24 +7,34 @@
   <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    {{!-- add header with nav for all pages (ADD CONDITIONAL SO IF LOGGED IN, DISPLAYS WELCOME MSG) --}}
-    <header>
-      <h1>Tech Blog</h1>
-      <nav>
-        <ul>
-          <li><strong>Welcome</strong></li>
-        </ul>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/login">Sign up</a></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-  <div class = "container">
-    {{{body}}}
-  </div>
+  <main>
+    <div class="container">
+      {{!-- add header with nav for all pages (ADD CONDITIONAL SO IF LOGGED IN, DISPLAYS WELCOME MSG) --}}
+      <header>
+        <h1>Tech Blog</h1>
+        <nav>
+          <ul>
+            <li><strong>Welcome</strong></li>
+          </ul>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            {{#if loggedIn}}
+            <li><a id="logout" href="/">Logout</a></li>
+            {{else}}
+            <li><a id="login" href="/login">Login or Signup</a></li>
+            {{/if}}
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <div class = "container">
+      {{{body}}}
+    </div>
+  </main>
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
 </html>
