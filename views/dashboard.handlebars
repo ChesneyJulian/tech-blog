@@ -1,4 +1,5 @@
 <div class="container">
+  <h2>{{username}}'s Dashboard</h2>
   {{#unless user.posts}}
   <div style="text-align: center;">
     <h5>No posts created</h5>
@@ -23,7 +24,7 @@
  </a>
 </div>
 {{/each}}
-  <footer style="position: sticky;" class="container">
+  <footer class="container">
     <form id="new-post">
       <label for="new-post">
         Create a New Post

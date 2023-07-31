@@ -2,11 +2,19 @@
   <article>
     <h3>{{post.title}}</h3>
     <p>{{post.content}}</p>
-  </article>
-  <article>
     <h4>Comments</h4>
-  {{#each post.comments}}
-    <p>Comment by {{username}}: {{content}}</p>
-  {{/each}}
+    <p style="text-align: right;"><a href="#new-comment">Add a Comment</a></p>
+    {{#each comments}}
+    <p style="color: gray;">Comment by {{user.username}}: {{content}}</p>
+    {{/each}}
   </article>
+   <footer class="container">
+    <form id="new-comment">
+      <label for="new-comment">
+        Add a Comment
+        <input type="text" id="comment" name="comment" placeholder="comment" required>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </footer>
 </div>
