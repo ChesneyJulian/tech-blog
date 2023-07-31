@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
     // render posts using home-page handlebars template
     res.render('home-page', { 
       posts,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
+      username: req.session.username
     });
   } catch (err) {
     res.status(500).json(err);
@@ -31,12 +32,31 @@ router.get('/post/:id', authorize, async (req, res) => {
     const post = singlePost.get({ plain: true });
     res.render('post', {
       post,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
+      username: req.session.username
     });
   } catch(err){
     res.status(500).json(err);
   };
-})
+});
+
+router.get('/dashboard', authorize, async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      where: {
+        username: req.session.username
+      }
+    });
+    const user = userData.get({ plain: true });
+    res.render('dashboard', {
+      user,
+      loggedIn: req.session.loggedIn,
+      username: req.session.username
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get('/login', (req, res) => {
   // implement conditional to check if session is loggedIn and if it is, then redirect to homepage
@@ -46,21 +66,6 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
-});
-
-router.get('/dashboard', authorize, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      include: [Post, Comment]
-    });
-    const user = userData.get({ plain: true });
-    res.render('dashboard', {
-      user,
-      loggedIn: req.session.loggedIn
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 module.exports = router;

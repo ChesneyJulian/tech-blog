@@ -14,7 +14,9 @@
         <h1>Tech Blog</h1>
         <nav>
           <ul>
-            <li><strong>Welcome</strong></li>
+            {{#if username}}
+            <li><strong>Welcome {{username}}</strong></li>
+            {{/if}}
           </ul>
           <ul>
             <li><a href="/">Home</a></li>

@@ -1,0 +1,17 @@
+<div class="container">
+  {{#each post}}
+  <div class="container">
+  <a href="/post/{{id}}">
+    <article class="card">
+    <h3>{{title}}</h3>
+    <p>{{content}}</p>
+     {{#each post.comments}}
+    <footer style="background-color: rgba(112, 159, 182, 0.564);">
+    <p>Comment by {{username}}: {{content}}</p>
+    </footer>
+  {{/each}}
+  </article>
+ </a>
+</div>
+  {{/each}}
+</div>
