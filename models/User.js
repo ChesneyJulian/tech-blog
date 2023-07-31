@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 // extend user from model to add custom password comparison method to user
 class User extends Model {
   // check that password entered at login matches User's password with bcrypt
-  checkPassword(password) {
+  comparePassword(password) {
     return bcrypt.compareSync(password, this.password);
   }
 };

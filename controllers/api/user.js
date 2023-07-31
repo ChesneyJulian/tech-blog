@@ -1,6 +1,25 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// create route for creating a user profile
+router.post('/', async (req, res) => {
+  try {
+    const userData = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+    });
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(userData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // create route for user login
 router.post('/login', async (req, res) => {
   try {
@@ -14,8 +33,8 @@ router.post('/login', async (req, res) => {
     if (!userData) {
       return res.status(400).json({message: 'Incorrect username or password'});
     };
-    // validate password using custom checkPassword method in User model with req.body.password
-    const validPassword = await userData.checkPassword(req.body.password);
+    // validate password using custom comparePassword method in User model with req.body.password
+    const validPassword = await userData.comparePassword(req.body.password);
     // return error if password is not validated
     if(!validPassword)  {
       return res.status(400).json({message: 'Incorrect username or password'});

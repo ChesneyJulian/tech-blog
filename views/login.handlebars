@@ -1,9 +1,9 @@
 <div class="container">
   <header>
-    <h2>Login or Sign Up to join the blog!</h2>
+    <h2>Login</h2>
   </header>
 </div>
-<form>
+<form id="login-form">
   <div class="grid">
     <label for="username">
       Username
@@ -17,3 +17,21 @@
   </div>
   <button type="submit">Submit</button>
 </form>
+<div>
+  <h3>Sign up below</h3>
+</div>
+<form id="signup-form">
+  <div class="grid">
+    <label for="signup-username">
+      Username
+      <input class="form-input" type="username" id="signup-username" name="signup-username" placeholder="username" required>
+    </label>
+
+    <label for="signup-password">
+      Password
+      <input class="form-input" type="password" id="signup-password" name="signup-password" placeholder="password" required>
+    </label>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<script src="./js/login.js"></script>

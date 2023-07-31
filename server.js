@@ -1,5 +1,6 @@
 // bring in express and sequelize instance from connectin.js
 const express = require('express');
+const path = require('path');
 const exphbs = require('express-handlebars');
 const session =  require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -30,6 +31,7 @@ app.set('view engine', 'handlebars');
 // set up middleware for parsing json and form content
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
