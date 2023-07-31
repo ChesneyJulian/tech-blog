@@ -1,4 +1,9 @@
 <div class="container">
+  {{#unless post}}
+  <div style="text-align: center;">
+    <h5>No posts created</h5>
+  </div>
+  {{/unless}}
   {{#each post}}
   <div class="container">
   <a href="/post/{{id}}">
@@ -14,4 +19,13 @@
  </a>
 </div>
   {{/each}}
+  <div class="container">
+    <form id="new-post">
+      <label for="new-post">
+        Create a New Post
+        <input type="text" id="new-post" name="new-post" placeholder="New post..." required>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </div>
