@@ -44,6 +44,23 @@ router.delete('/delete', authorize, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.put('/edit', authorize, async (req, res) => {
+  try{
+    const postData = await Post.update({
+      title: req.body.title,
+      content: req.body.content,
+    },
+    {
+      where: {
+        id: req.body.postId
+      }
+    });
+    res.status(200).json({message: 'Post updated'});
+  } catch (err) {
+    res.status(500).json(err);
+  };
 })
 
 module.exports = router;

@@ -3,7 +3,7 @@
     <div style="padding: 12px;">
       <h2>{{post.title}}</h2>
       <p style="color: var(--primary)">{{post.content}}</p>
-      {{!-- <p>{{format_date post.createdAt}}</p> --}}
+      <p style="color: gray;">Posted by {{post.user.username}} on {{format_date post.createdAt}}</p>
     </div>
   
     <div class="grid" style="padding: 12px;">
@@ -18,7 +18,7 @@
       <p style="color: gray;">Comment by {{user.username}}: {{content}}</p>
         {{/each}}
    <div class="container">
-    <form id="new-comment">
+    <form style="padding: 20px;" id="new-comment">
       <label for="new-comment">
         <input type="text" id="comment" name="comment" placeholder="Add a comment" required>
         <input style="display: none;" type="text" id="postId" name="postId" value="{{post.id}}">
@@ -29,7 +29,17 @@
   <div class="grid">
       <button id="delete-btn" value="{{post.id}}">Delete Post</button>
       <button id="edit-btn" value="{{post.id}}">Edit Post</button>
-    </div>
+      <div id="edit-post-form" style="display: none;">
+        <form id="edit-post">
+        <label for="edit-post">
+          Edit Post
+          <input type="text" id="update-title" name="title" placeholder="Title: {{post.title}}" required>
+          <input type="text" id="update-content" name="content" placeholder="Content: {{post.content}}" required>
+        </label>
+      <button type="submit">Submit</button>
+    </form>
+      </div>
+  </div>
   </article>
 </div>
 
