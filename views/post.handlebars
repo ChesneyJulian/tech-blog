@@ -1,23 +1,29 @@
 <div class="container">
   <article>
-    <h3>{{post.title}}</h3>
-    <p>{{post.content}}</p>
-    {{!-- <p>{{format_date post.createdAt}}</p> --}}
-    <h4>Comments</h4>
-    <p style="text-align: right;"><a href="#new-comment">Add a Comment</a></p>
-    {{#each comments}}
-    <p style="color: gray;">Comment by {{user.username}}: {{content}}</p>
-    {{/each}}
-  </article>
-   <footer class="container">
+    <div style="padding: 12px;">
+      <h2>{{post.title}}</h2>
+      <p style="color: var(--primary)">{{post.content}}</p>
+      {{!-- <p>{{format_date post.createdAt}}</p> --}}
+    </div>
+  
+    <div class="grid" style="padding: 12px;">
+      <div>
+        <h4 style="color: gray;">Comments</h4>
+      </div>
+      <div>
+        <p style="text-align: right;"><a href="#new-comment">Add a Comment</a></p>
+      </div>
+    </div>
+        {{#each comments}}
+      <p style="color: gray;">Comment by {{user.username}}: {{content}}</p>
+        {{/each}}
+   <div class="container">
     <form id="new-comment">
       <label for="new-comment">
-        Add a Comment
-        <input type="text" id="comment" name="comment" placeholder="comment" required>
+        <input type="text" id="comment" name="comment" placeholder="Add a comment" required>
         <input style="display: none;" type="text" id="postId" name="postId" value="{{post.id}}">
       </label>
       <button type="submit">Submit</button>
     </form>
-  </footer>
-</div>
+  </div>
 <script src="../js/createComment.js"></script>
