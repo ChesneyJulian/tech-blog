@@ -2,7 +2,7 @@
   <article>
     <h3>{{post.title}}</h3>
     <p>{{post.content}}</p>
-    <p style="text-align: right;"><a href="/post/delete-post/{{id}}">Delete Post</a></p>
+    <button id="delete-btn" value="{{post.id}}">Delete Post</button>
     {{!-- <p>{{format_date post.createdAt}}</p> --}}
     <h4>Comments</h4>
     <p style="text-align: right;"><a href="#new-comment">Add a Comment</a></p>
@@ -23,3 +23,4 @@
 </div>
 
 <script src="../js/createComment.js"></script>
+<script src="../js/createPost.js"></script>

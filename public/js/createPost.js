@@ -1,4 +1,5 @@
 const postSubmissionForm = document.querySelector('#new-post');
+const deleteBtn = document.querySelector('#delete-btn');
 
 const handlePostSubmission = async (event) => {
   event.preventDefault();
@@ -20,8 +21,23 @@ const handlePostSubmission = async (event) => {
 
 const handlePostDelete = async (event) => {
   event.preventDefault();
-  
-  const response = await fetch ('/api/post/delete-post')
-}
+  const postId = deleteBtn.value.trim();
+  console.log(postId);
+  const response = await fetch ('/api/post/delete', {
+    method: 'DELETE',
+    body: JSON.stringify({ postId }),
+    headers: { 'Content-Type': 'application/json'}
+  });
 
-postSubmissionForm.addEventListener('submit', handlePostSubmission);
+  if (response.ok) {
+    document.location.replace('/dashboard');
+    alert('Post Deleted');
+  }
+};
+
+if (postSubmissionForm) {
+  postSubmissionForm.addEventListener('submit', handlePostSubmission);
+};
+if (deleteBtn) {
+  deleteBtn.addEventListener('click', handlePostDelete);
+};

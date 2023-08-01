@@ -33,9 +33,14 @@ router.post('/new-comment', authorize, async (req, res) => {
   }
 });
 
-router.post('/delete-post/:id', authorize, async (req, res) => {
+router.delete('/delete', authorize, async (req, res) => {
   try{
-    const postData = await Post.destroy()
+    const postData = await Post.destroy({
+      where: {
+        id: req.body.postId,
+      }
+    })
+    res.status(200).json({message: 'Post Deleted'});
   } catch (err) {
     res.status(500).json(err);
   }
