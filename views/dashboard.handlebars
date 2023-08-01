@@ -12,14 +12,14 @@
   <div class="container">
   <a href="/user-post/{{id}}">
     <article class="card">
-    <h3>{{title}}</h3>
-    <p>{{content}}</p>
-     {{#each comments}}
-    <footer style="background-color: rgba(112, 159, 182, 0.564);">
-    <p>Comment by {{username}}: {{content}}</p>
-    </footer>
-  {{/each}}
-  </article>
+      <div>
+        <h3>{{title}}</h3>
+        <p>{{content}}</p>
+      </div>
+      <footer style="background-color: rgba(112, 159, 182, 0.564);">
+        <p style="text-align: right;">Posted on {{format_date createdAt}}</p>
+      </footer>
+    </article>
  </a>
 </div>
 {{/each}}

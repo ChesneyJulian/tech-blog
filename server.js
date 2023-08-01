@@ -6,11 +6,10 @@ const session =  require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
-const format_date = require('./utils/format-date');
+const helpers = require('./utils/helpers');
 // set up instance of express and port variable
 const PORT = process.env.PORT ?? 3001;
 const app = express();
-const hbs = exphbs.create({ format_date });
 
 //  set up session with cookies default
 const sess = {
@@ -24,6 +23,7 @@ const sess = {
 };
 
 app.use(session(sess));
+const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

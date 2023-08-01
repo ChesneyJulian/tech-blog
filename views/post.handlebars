@@ -3,7 +3,7 @@
     <div style="padding: 12px;">
       <h2>{{post.title}}</h2>
       <p style="color: var(--primary)">{{post.content}}</p>
-      {{!-- <p>{{format_date post.createdAt}}</p> --}}
+      <p style="color: gray;">Posted by {{post.user.username}} on {{format_date post.createdAt}}</p>
     </div>
   
     <div class="grid" style="padding: 12px;">

@@ -1,12 +1,13 @@
-{{#each posts}}
+{{#each posts as |post|}}
 <div class="container">
-  <a href="/posts/{{id}}">
+  <a href="/posts/{{post.id}}">
     <article class="card">
-    <h3>{{title}}</h3>
-    <p>{{content}}</p>
-    {{#with user}}
-    <footer style="background-color: rgba(112, 159, 182, 0.564);">Posted by {{username}}</footer>
-    {{/with}}
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+    <footer style="background-color: rgba(112, 159, 182, 0.564);">
+      <p style="text-align: right;">
+        Posted by {{post.user.username}} on {{format_date post.createdAt}}</p>
+    </footer>
   </article>
  </a>
 </div>
