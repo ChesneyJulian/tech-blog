@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/post/:id', authorize, async (req, res) => {
+router.get('/posts/:id', authorize, async (req, res) => {
   try{
     const singlePost = await Post.findByPk(req.params.id, {
       include: [User, Comment]
@@ -38,7 +38,8 @@ router.get('/post/:id', authorize, async (req, res) => {
       post,
       comments,
       loggedIn: req.session.loggedIn,
-      username: req.session.username
+      username: req.session.username,
+      userId: req.session.userId
     });
   } catch(err){
     res.status(500).json(err);

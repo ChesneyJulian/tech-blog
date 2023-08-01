@@ -18,4 +18,10 @@ const handlePostSubmission = async (event) => {
   }
 };
 
+const handlePostDelete = async (event) => {
+  event.preventDefault();
+  
+  const response = await fetch ('/api/post/delete-post')
+}
+
 postSubmissionForm.addEventListener('submit', handlePostSubmission);

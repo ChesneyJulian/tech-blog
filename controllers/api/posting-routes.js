@@ -25,9 +25,9 @@ router.post('/new-comment', authorize, async (req, res) => {
     console.log('CREATING COMMENT')
     console.log('POST ID IN SERVER', req.body.postId);
     const newComment = await Comment.create({
-      content: req.body.comment,
+      content: req.body.content,
       postId: req.body.postId,
-      creatorId: req.session.userId
+      creatorId: req.session.userId,
     })
     console.log('NEW COMMENT ', newComment);
     res.status(200).json(newComment);
@@ -35,5 +35,13 @@ router.post('/new-comment', authorize, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.post('/delete-post/:id', authorize, async (req, res) => {
+  try{
+    const postData = await Post.destroy()
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 module.exports = router;
