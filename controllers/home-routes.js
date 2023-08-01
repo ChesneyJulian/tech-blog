@@ -67,6 +67,32 @@ router.get('/dashboard', authorize, async (req, res) => {
   }
 });
 
+router.get('/user-post/:id', authorize, async (req, res) =>{
+  try{
+    const singlePost = await Post.findByPk(req.params.id, {
+      include: [User, Comment]
+    });
+    const post = singlePost.get({ plain: true });
+    const commentData = Comment.findAll({
+      where: {
+        postId: post.id
+      }, 
+        include: [User]
+    });
+    const comments = (await commentData).map(comment => comment.get({ plain: true }));
+    console.log(post);
+    res.render('user-posts', {
+      post,
+      comments,
+      loggedIn: req.session.loggedIn,
+      username: req.session.username,
+      userId: req.session.userId
+    });
+  } catch(err){
+    res.status(500).json(err);
+  };
+})
+
 router.get('/login', (req, res) => {
   // implement conditional to check if session is loggedIn and if it is, then redirect to homepage
   if (req.session.loggedIn) {

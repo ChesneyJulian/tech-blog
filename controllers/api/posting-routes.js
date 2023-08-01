@@ -22,14 +22,11 @@ router.post('/new-post', authorize, async (req, res) => {
 
 router.post('/new-comment', authorize, async (req, res) => {  
   try {
-    console.log('CREATING COMMENT')
-    console.log('POST ID IN SERVER', req.body.postId);
     const newComment = await Comment.create({
       content: req.body.content,
       postId: req.body.postId,
       creatorId: req.session.userId,
     })
-    console.log('NEW COMMENT ', newComment);
     res.status(200).json(newComment);
   } catch (err) {
     res.status(500).json(err);

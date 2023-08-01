@@ -1,0 +1,25 @@
+<div class="container">
+  <article>
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+    <p style="text-align: right;"><a href="/post/delete-post/{{id}}">Delete Post</a></p>
+    {{!-- <p>{{format_date post.createdAt}}</p> --}}
+    <h4>Comments</h4>
+    <p style="text-align: right;"><a href="#new-comment">Add a Comment</a></p>
+    {{#each comments}}
+    <p style="color: gray;">Comment by {{user.username}}: {{content}}</p>
+    {{/each}}
+  </article>
+   <footer class="container">
+    <form id="new-comment">
+      <label for="new-comment">
+        Add a Comment
+        <input type="text" id="comment" name="comment" placeholder="comment" required>
+        <input style="display: none;" type="text" id="postId" name="postId" value="{{post.id}}">
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </footer>
+</div>
+
+<script src="../js/createComment.js"></script>
