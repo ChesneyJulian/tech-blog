@@ -4,9 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "prestart": "node config/init",
     "start": "node server",
-    "prewatch": "node config/init",
     "watch": "nodemon server"
   },
   "keywords": [],
