@@ -1,6 +1,6 @@
 <div class="container">
   <h2>{{username}}'s Dashboard</h2>
-  {{#unless user.posts}}
+  {{#unless posts}}
   <div style="text-align: center;">
     <h5>No posts created</h5>
   </div>
@@ -8,7 +8,7 @@
   <div style="text-align: center;">
     <a href="#new-post">Create a new post</a>
   </div>
-  {{#each user.posts}}
+  {{#each posts}}
   <div class="container">
   <a href="/user-post/{{id}}">
     <article class="card">

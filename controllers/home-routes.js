@@ -8,7 +8,8 @@ router.get('/', async (req, res) => {
     // get all post data
     const postData = await Post.findAll({include: [User, Comment]});
     // serialize post data
-    const posts = await postData.map(post => post.get({ plain: true }));
+    const allPosts = await postData.map(post => post.get({ plain: true }));
+    const  posts = allPosts.reverse();
     // render posts using home-page handlebars template
     res.render('home-page', { 
       posts,
@@ -56,9 +57,14 @@ router.get('/dashboard', authorize, async (req, res) => {
         model: Post
       }]
     });
+    console.log('USERDATA ', userData.posts);
     const user = userData.get({ plain: true });
+    const userPosts = user.posts.map(post => post);
+    const posts = userPosts.reverse();
+
     res.render('dashboard', {
       user,
+      posts,
       loggedIn: req.session.loggedIn,
       username: req.session.username,
     });
