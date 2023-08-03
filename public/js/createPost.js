@@ -1,7 +1,13 @@
 const postSubmissionForm = document.querySelector('#new-post');
+const newPostForm = document.querySelector('#new-post-form');
+const createPostLink = document.querySelector('#create-post-link');
 const deleteBtn = document.querySelector('#delete-btn');
 const editPostForm = document.querySelector('#edit-post-form');
 const editBtn = document.querySelector('#edit-btn');
+
+const handleCreateClick = async (event) => {
+  newPostForm.setAttribute("style", "");
+};
 
 const handlePostSubmission = async (event) => {
   event.preventDefault();
@@ -36,6 +42,7 @@ const handlePostDelete = async (event) => {
     alert('Post Deleted');
   }
 };
+
 const handleEditClick = async (event) => {
   event.preventDefault();
   editPostForm.setAttribute("style", "");
@@ -58,7 +65,8 @@ const handlePostEdit = async (event) => {
   }
 }
 
-if (postSubmissionForm) {
+if (createPostLink) {
+  createPostLink.addEventListener('click', handleCreateClick);
   postSubmissionForm.addEventListener('submit', handlePostSubmission);
 };
 if (deleteBtn && editBtn) {
