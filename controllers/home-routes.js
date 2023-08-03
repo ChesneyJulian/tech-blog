@@ -34,7 +34,7 @@ router.get('/posts/:id', authorize, async (req, res) => {
         include: [User]
     });
     const comments = (await commentData).map(comment => comment.get({ plain: true }));
-    console.log(post);
+
     res.render('post', {
       post,
       comments,
@@ -57,7 +57,7 @@ router.get('/dashboard', authorize, async (req, res) => {
         model: Post
       }]
     });
-    console.log('USERDATA ', userData.posts);
+
     const user = userData.get({ plain: true });
     const userPosts = user.posts.map(post => post);
     const posts = userPosts.reverse();
@@ -86,7 +86,7 @@ router.get('/user-post/:id', authorize, async (req, res) =>{
         include: [User]
     });
     const comments = (await commentData).map(comment => comment.get({ plain: true }));
-    console.log(post);
+
     res.render('user-posts', {
       post,
       comments,
